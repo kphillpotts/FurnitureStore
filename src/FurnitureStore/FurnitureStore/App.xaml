@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="FurnitureStore.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="TitleFont" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="OpenSans-Bold" />
+                <On Platform="Android" Value="OpenSans-Bold.ttf#Bold" />
+            </OnPlatform>
+
+
+            <OnPlatform x:Key="BodyFont" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="OpenSans-Regular" />
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Regular" />
+            </OnPlatform>
+
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="24" />
+            </Style>
+
+            <Style x:Key="CategoryHeaderStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#A8A8A8" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="CategorySelectedHeaderStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#323232" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ItemName" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#323232" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ItemPrice" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#A8A8A8" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style TargetType="Grid">
+                <Setter Property="RowSpacing" Value="0" />
+                <Setter Property="ColumnSpacing" Value="0" />
+            </Style>
+
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>
