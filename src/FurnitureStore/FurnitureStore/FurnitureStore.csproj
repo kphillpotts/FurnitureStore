@@ -9,9 +9,14 @@
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.5.1-beta" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.819712-pre2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.3.2-beta" />
+    <PackageReference Include="Xamarin.Plugin.SharedTransitions" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\TitleBar.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="ProductDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -1,15 +1,184 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="FurnitureStore.ProductDetailsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+<ContentPage
+    x:Class="FurnitureStore.ProductDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FurnitureStore.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:sharedTransition="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <Style x:Key="PriceTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#4F71B5" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductName" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="40" />
+            </Style>
+            <Style x:Key="ProductCode" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+                <Setter Property="TextColor" Value="#CCD9FF" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductInfoHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#656565" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductDescription" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+                <Setter Property="TextColor" Value="#656565" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="370" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="95" />
+        </Grid.RowDefinitions>
+
+        <!--  background image  -->
+        <Image
+            Grid.RowSpan="3"
+            Aspect="Fill"
+            Source="header_background" />
+
+        <!--  title bar  -->
+        <controls:TitleBar />
+
+        <!--  main content  -->
+        <BoxView Grid.Row="1" BackgroundColor="White" />
+
+        <Grid
+            Grid.Row="1"
+            Margin="30,30,0,0"
+            RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Style="{StaticResource ProductInfoHeader}" Text="CHOOSE COLOR" />
+
+            <!--  color picker  -->
+            <ScrollView
+                Grid.Row="1"
+                HorizontalScrollBarVisibility="Never"
+                Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal">
+                    <BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Red</x:String>
+                            <x:String>Green</x:String>
+                            <x:String>CornflowerBlue</x:String>
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="80" WidthRequest="80">
+                                <Frame
+                                    Padding="0"
+                                    BorderColor="#DDDDDD"
+                                    CornerRadius="35"
+                                    HasShadow="False"
+                                    HeightRequest="70"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="70" />
+                                <BoxView
+                                    BackgroundColor="{Binding .}"
+                                    CornerRadius="25"
+                                    HeightRequest="50"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="50" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <Label
+                Grid.Row="2"
+                Style="{StaticResource ProductInfoHeader}"
+                Text="DESCRIPTION" />
+            <ScrollView Grid.Row="3" Orientation="Vertical">
+                <Label Style="{StaticResource ProductDescription}" Text="{Binding Description}" />
+            </ScrollView>
+        </Grid>
+
+
+        <StackLayout
+            Margin="30,80,0,0"
+            Spacing="0"
+            VerticalOptions="Start">
+            <Label Style="{StaticResource ProductCode}" Text="B239438" />
+            <Label Style="{StaticResource ProductName}" Text="{Binding Name}" />
+            <StackLayout
+                Margin="0,20,0,0"
+                Orientation="Horizontal"
+                Spacing="10">
+                <Image Source="tick" />
+                <Label Style="{StaticResource ProductCode}" Text="IN STOCK" />
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+
+
+        <!--  chair image  -->
+        <Image
+            sharedTransition:Transition.Name="SelectedItemImage"
+            HorizontalOptions="End"
+            Source="{Binding Image}"
+            TranslationY="50"
+            VerticalOptions="End" />
+
+        <pancake:PancakeView
+            Padding="20"
+            BackgroundColor="#EAD049"
+            CornerRadius="0,10,0,10"
+            HorizontalOptions="Start"
+            TranslationY="-40"
+            VerticalOptions="End">
+
+            <Label Style="{StaticResource PriceTextStyle}" Text="{Binding Price, StringFormat='{0} USD'}" />
+        </pancake:PancakeView>
+
+
+
+
+
+
+
+        <!--  add to cart button  -->
+        <BoxView
+            Grid.Row="2"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Color="#A7C64E" />
+        <Label
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            Style="{StaticResource ButtonTextStyle}"
+            Text="{Binding Price, StringFormat='Add to cart - {0:C}'}"
+            VerticalOptions="Center" />
+
+    </Grid>
+
 </ContentPage>

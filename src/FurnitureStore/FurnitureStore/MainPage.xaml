@@ -3,8 +3,10 @@
     x:Class="FurnitureStore.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FurnitureStore.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sharedTransition="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:viewmodel="clr-namespace:FurnitureStore.ViewModels"
     NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
@@ -21,19 +23,16 @@
             <RowDefinition Height="95" />
         </Grid.RowDefinitions>
 
-        <BoxView Color="#7D87F1" />
 
-        <BoxView
-            Grid.Row="1"
-            HeightRequest="1"
-            VerticalOptions="End"
-            Color="#A8A8A8" />
 
-        <BoxView
-            Grid.Row="3"
-            HeightRequest="1"
-            VerticalOptions="Start"
-            Color="#A8A8A8" />
+        <!--<BoxView Color="#7D87F1" />-->
+        <Image
+            Grid.RowSpan="4"
+            Aspect="Fill"
+            Source="header_background" />
+
+        <!--  header navigation  -->
+        <controls:TitleBar />
 
         <Label
             Margin="20"
@@ -42,7 +41,7 @@
             Text="IKEA Catalog"
             VerticalOptions="End" />
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" BackgroundColor="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -71,6 +70,7 @@
         <CarouselView
             x:Name="MyCarousel"
             Grid.Row="2"
+            BackgroundColor="White"
             HorizontalScrollBarVisibility="Never"
             ItemsSource="{Binding Items}"
             PeekAreaInsets="{OnPlatform iOS='0, 0, 100, 0',
@@ -89,7 +89,10 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="AUTO" />
                         </Grid.RowDefinitions>
-                        <Image Source="{Binding Image}" />
+                        <Image
+                            sharedTransition:Transition.Group="{Binding Name}"
+                            sharedTransition:Transition.Name="SelectedItemImage"
+                            Source="{Binding Image}" />
 
                         <BoxView
                             Grid.Row="0"
@@ -109,6 +112,40 @@
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
+
+        <Grid Grid.Row="3" BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image
+                HorizontalOptions="Center"
+                Source="star_icon"
+                VerticalOptions="Center" />
+            <Image
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Source="home_icon"
+                VerticalOptions="Center" />
+            <Image
+                Grid.Column="2"
+                HorizontalOptions="Center"
+                Source="profile_icon"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <BoxView
+            Grid.Row="1"
+            HeightRequest="1"
+            VerticalOptions="End"
+            Color="#A8A8A8" />
+
+        <BoxView
+            Grid.Row="3"
+            HeightRequest="1"
+            VerticalOptions="Start"
+            Color="#A8A8A8" />
 
     </Grid>
 

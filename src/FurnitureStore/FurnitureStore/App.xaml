@@ -60,6 +60,10 @@
                 <Setter Property="ColumnSpacing" Value="0" />
             </Style>
 
+            <!--<Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0"/>
+            </Style>-->
+
 
         </ResourceDictionary>
 

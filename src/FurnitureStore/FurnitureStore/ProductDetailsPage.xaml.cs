@@ -16,14 +16,12 @@ namespace FurnitureStore
     {
         private object selectedItem;
 
-        public ProductDetailsPage()
-        {
-            InitializeComponent();
-        }
         public ProductDetailsPage(ItemsViewModel selectedItem)
         {
+            InitializeComponent();
             this.selectedItem = selectedItem;
             this.Title = selectedItem.Name;
+            this.BindingContext = selectedItem;
         }
     }
 }

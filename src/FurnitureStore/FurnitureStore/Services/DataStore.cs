@@ -28,6 +28,21 @@ namespace FurnitureStore.Services
 
             Items.Add(new Item()
             {
+                Name = "Mammut2",
+                Description = "The robust and lightweight MAMMUT series withstands the elements of weather and wild imaginative play. Perfect for the outdoors and easy to clean when it’s time to move indoors.",
+                InStock = true,
+                Category = "Chairs",
+                Price = 17.50M,
+                Variations = new List<Variation>()
+                {
+                    new Variation () { ColorHex="#FFFFFF", Image="mammut_blue" },
+                    new Variation () { ColorHex="#FFFFFF", Image="mammut_pink" },
+                    new Variation () { ColorHex="#FFFFFF", Image="mammut_red" },
+                }
+            });
+
+            Items.Add(new Item()
+            {
                 Name = "Poang",
                 Description = "Layer-glued bent birch frame gives comfortable resilience. The high back gives good support for your neck.",
                 InStock = true,

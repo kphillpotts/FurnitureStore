@@ -12,10 +12,25 @@ namespace FurnitureStore.ViewModels
         private string name;
         private string image;
         private decimal price;
+        private string description;
+        private string code;
+
         public string Name
         {
             get { return name; }
             set { SetProperty(ref name, value); }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { SetProperty(ref description, value); }
+        }
+
+        public string Code
+        {
+            get { return code; }
+            set { SetProperty(ref code, value); }
         }
 
         public string Image
@@ -35,6 +50,8 @@ namespace FurnitureStore.ViewModels
             Name = item.Name;
             Image = item.Variations.FirstOrDefault()?.Image;
             Price = item.Price;
+            Code = item.ItemNumber;
+            Description = item.Description;
         }
     }
 
