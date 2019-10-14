@@ -5,9 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FurnitureStore.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sharedTransition="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:viewmodel="clr-namespace:FurnitureStore.ViewModels"
+    ios:Page.PreferredStatusBarUpdateAnimation="Fade"
+    ios:Page.PrefersHomeIndicatorAutoHidden="true"
+    ios:Page.PrefersStatusBarHidden="True"
     NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
 
@@ -41,7 +45,10 @@
             Text="IKEA Catalog"
             VerticalOptions="End" />
 
-        <Grid Grid.Row="1" BackgroundColor="White">
+        <Grid
+            x:Name="CategoryGrid"
+            Grid.Row="1"
+            BackgroundColor="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -52,20 +59,46 @@
             <Label
                 Grid.Column="0"
                 Style="{StaticResource CategorySelectedHeaderStyle}"
-                Text="Chairs" />
+                Text="Chairs">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
             <Label
                 Grid.Column="1"
                 Style="{StaticResource CategoryHeaderStyle}"
-                Text="Sofas" />
+                Text="Sofas">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
             <Label
                 Grid.Column="2"
                 Style="{StaticResource CategoryHeaderStyle}"
-                Text="Tables" />
+                Text="Tables">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
             <Label
                 Grid.Column="3"
                 Style="{StaticResource CategoryHeaderStyle}"
-                Text="Lamps" />
+                Text="Lamps">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
         </Grid>
+        <BoxView
+            x:Name="SelectionIndicator"
+            Grid.Row="1"
+            CornerRadius="5,5,0,0"
+            HeightRequest="5"
+            HorizontalOptions="Start"
+            TranslationX="0"
+            VerticalOptions="End"
+            WidthRequest="70"
+            Color="#7C86F2" />
 
         <CarouselView
             x:Name="MyCarousel"

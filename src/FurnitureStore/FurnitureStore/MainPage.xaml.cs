@@ -34,6 +34,13 @@ namespace FurnitureStore
             Debug.WriteLine($"Position Changed {e.CurrentPosition}");
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            SetCategory(CategoryGrid.Children[0] as Label);
+        }
+
+
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             // get the position
@@ -48,5 +55,34 @@ namespace FurnitureStore
             }
 
         }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            var l = sender as Label;
+            SetCategory(l);
+        }
+
+        private void SetCategory (Label label)
+        {
+
+            // set all the styles to deselected
+            foreach (var item in CategoryGrid.Children)
+            {
+                if (item is Label)
+                {
+                    item.Style = (Style)Application.Current.Resources["CategoryHeaderStyle"];
+                }
+            }
+
+            // set the selected items style
+            label.Style = (Style)Application.Current.Resources["CategorySelectedHeaderStyle"];
+
+            // move the selection bar to the tapped item
+            SelectionIndicator.TranslateTo(label.X, 0, 250, Easing.CubicInOut);
+            SelectionIndicator.WidthRequest = label.Width;
+
+        }
+
+
     }
 }

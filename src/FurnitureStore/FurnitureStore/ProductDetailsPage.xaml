@@ -4,10 +4,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FurnitureStore.Controls"
+    xmlns:converts="clr-namespace:FurnitureStore.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:sharedTransition="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    x:Name="RootPage"
+    ios:Page.PreferredStatusBarUpdateAnimation="Fade"
+    ios:Page.PrefersHomeIndicatorAutoHidden="true"
+    ios:Page.PrefersStatusBarHidden="True"
     NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
 
@@ -43,6 +49,17 @@
                 <Setter Property="TextColor" Value="#656565" />
                 <Setter Property="FontSize" Value="18" />
             </Style>
+
+            <converts:BoolToStringConverter
+                x:Key="inStockTextConverter"
+                FalseString="OUT OF STOCK"
+                TrueString="IN STOCK" />
+
+            <converts:BoolToStringConverter
+                x:Key="inStockImageConverter"
+                FalseString="cross"
+                TrueString="tick" />
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -82,14 +99,8 @@
                 Grid.Row="1"
                 HorizontalScrollBarVisibility="Never"
                 Orientation="Horizontal">
-                <StackLayout Orientation="Horizontal">
-                    <BindableLayout.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Red</x:String>
-                            <x:String>Green</x:String>
-                            <x:String>CornflowerBlue</x:String>
-                        </x:Array>
-                    </BindableLayout.ItemsSource>
+                <StackLayout BindableLayout.ItemsSource="{Binding Variations}" Orientation="Horizontal">
+
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid HeightRequest="80" WidthRequest="80">
@@ -100,15 +111,19 @@
                                     HasShadow="False"
                                     HeightRequest="70"
                                     HorizontalOptions="Center"
+                                    IsVisible="{Binding IsSelected}"
                                     VerticalOptions="Center"
                                     WidthRequest="70" />
                                 <BoxView
-                                    BackgroundColor="{Binding .}"
+                                    BackgroundColor="{Binding ColorHex}"
                                     CornerRadius="25"
                                     HeightRequest="50"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
                                     WidthRequest="50" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.VariationSelectedCommand, Source={x:Reference RootPage}}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
                             </Grid>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
@@ -119,9 +134,24 @@
                 Grid.Row="2"
                 Style="{StaticResource ProductInfoHeader}"
                 Text="DESCRIPTION" />
-            <ScrollView Grid.Row="3" Orientation="Vertical">
-                <Label Style="{StaticResource ProductDescription}" Text="{Binding Description}" />
+            <ScrollView
+                Grid.Row="3"
+                Padding="0,0,0,30"
+                Orientation="Vertical">
+                <Label
+                    Margin="0,0,20,0"
+                    Style="{StaticResource ProductDescription}"
+                    Text="{Binding Description}" />
             </ScrollView>
+            <pancake:PancakeView Grid.Row="3" BackgroundGradientAngle="0">
+                <pancake:PancakeView.BackgroundGradientStops>
+                    <pancake:GradientStopCollection>
+                        <pancake:GradientStop Offset="0" Color="Transparent" />
+                        <pancake:GradientStop Offset=".5" Color="Transparent" />
+                        <pancake:GradientStop Offset="1" Color="White" />
+                    </pancake:GradientStopCollection>
+                </pancake:PancakeView.BackgroundGradientStops>
+            </pancake:PancakeView>
         </Grid>
 
 
@@ -135,8 +165,8 @@
                 Margin="0,20,0,0"
                 Orientation="Horizontal"
                 Spacing="10">
-                <Image Source="tick" />
-                <Label Style="{StaticResource ProductCode}" Text="IN STOCK" />
+                <Image Source="{Binding InStock, Converter={StaticResource inStockImageConverter}}" />
+                <Label Style="{StaticResource ProductCode}" Text="{Binding InStock, Converter={StaticResource inStockTextConverter}}" />
             </StackLayout>
         </StackLayout>
 

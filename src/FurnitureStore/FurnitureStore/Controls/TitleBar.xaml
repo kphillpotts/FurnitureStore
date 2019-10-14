@@ -21,12 +21,28 @@
                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
             </Image.GestureRecognizers>
         </Image>
-        <Image
+
+        <Grid
             Grid.Column="1"
             Margin="30"
             HorizontalOptions="End"
-            Source="basket_icon"
-            VerticalOptions="Center" />
+            VerticalOptions="Center">
+            <Image Source="basket_icon" />
+            <BoxView
+                CornerRadius="10"
+                HeightRequest="20"
+                TranslationX="10"
+                TranslationY="10"
+                WidthRequest="20"
+                Color="#EAD049" />
+            <Label
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource BadgeText}"
+                Text="1"
+                TranslationX="10"
+                TranslationY="10"
+                VerticalTextAlignment="Center" />
+        </Grid>
     </Grid>
 
 </ContentView>

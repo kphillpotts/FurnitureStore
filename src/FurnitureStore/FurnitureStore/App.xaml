@@ -55,6 +55,12 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
+            <Style x:Key="BadgeText" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="TextColor" Value="#4F71B5" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
             <Style TargetType="Grid">
                 <Setter Property="RowSpacing" Value="0" />
                 <Setter Property="ColumnSpacing" Value="0" />

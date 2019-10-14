@@ -20,9 +20,9 @@ namespace FurnitureStore.Services
                 Price = 17.50M,
                 Variations = new List<Variation>()
                 {
-                    new Variation () { ColorHex="#FFFFFF", Image="mammut_blue" },
-                    new Variation () { ColorHex="#FFFFFF", Image="mammut_pink" },
-                    new Variation () { ColorHex="#FFFFFF", Image="mammut_red" },
+                    new Variation () { ColorHex="#0000FF", Image="mammut_blue" },
+                    new Variation () { ColorHex="#ffC0CB", Image="mammut_pink" },
+                    new Variation () { ColorHex="#FF0000", Image="mammut_red" },
                 }
             });
 
@@ -35,9 +35,9 @@ namespace FurnitureStore.Services
                 Price = 17.50M,
                 Variations = new List<Variation>()
                 {
-                    new Variation () { ColorHex="#FFFFFF", Image="mammut_blue" },
-                    new Variation () { ColorHex="#FFFFFF", Image="mammut_pink" },
-                    new Variation () { ColorHex="#FFFFFF", Image="mammut_red" },
+                    new Variation () { ColorHex="#ffC0CB", Image="mammut_pink" },
+                    new Variation () { ColorHex="#0000FF", Image="mammut_blue" },
+                    new Variation () { ColorHex="#FF0000", Image="mammut_red" },
                 }
             });
 
@@ -45,15 +45,15 @@ namespace FurnitureStore.Services
             {
                 Name = "Poang",
                 Description = "Layer-glued bent birch frame gives comfortable resilience. The high back gives good support for your neck.",
-                InStock = true,
+                InStock = false,
                 Price = 119.00M,
                 Category = "Chairs",
                 Variations = new List<Variation>()
                 {
-                    new Variation () { ColorHex="#FFFFFF", Image="poang_red" },
-                    new Variation () { ColorHex="#FFFFFF", Image="poang_beige" },
-                    new Variation () { ColorHex="#FFFFFF", Image="poang_charcoal" },
-                    new Variation () { ColorHex="#FFFFFF", Image="poang_green" },
+                    new Variation () { ColorHex="#FF0000", Image="poang_red" },
+                    new Variation () { ColorHex="#E1C699", Image="poang_beige" },
+                    new Variation () { ColorHex="#36454F", Image="poang_charcoal" },
+                    new Variation () { ColorHex="#00FF00", Image="poang_green" },
                 }
             });
 
